@@ -232,7 +232,7 @@ const CONFIG={
   whatsapp:"573114635725",      // tu número con código de país, sin + ni espacios
   currency:"COP",
   instagram:"https://instagram.com/tu_usuario",
-  tiktok:"https://tiktok.com/@tu_usuario"
+  tiktok:"https://www.tiktok.com/@nexotech67?_r=1&_t=ZS-9AB4Bydyyge"
 };
 /* Cada producto: nombre, categoría, precio en COP, emoji, color, descripción, características e imagen opcional (ej. "img/audifonos.jpg") */
 const PRODUCTS=[
@@ -282,7 +282,7 @@ function renderCarousel(){
 
 function waLink(p){
   const msg="Hola, quiero pedir: "+p.name+" ("+fmt(p.price)+"). ¿Está disponible?";
-  return "https://wa.me/+573114635725"+CONFIG.whatsapp+"?text="+encodeURIComponent(msg);
+  return "https://wa.me/qr/MJ4LSEEW56UJN1"+CONFIG.whatsapp+"?text="+encodeURIComponent(msg);
 }
 function renderChips(){
   $("chips").innerHTML="";
