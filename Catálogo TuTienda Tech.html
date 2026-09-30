@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NexoTech Catalogo</title>
+<link rel="icon" type="image/jpeg" href="img/nexotechlogo.jpeg">
+<style>
+:root{--bg:#f2f4f8;--card:#fff;--ink:#16213a;--mute:#5d6883;--line:#dde2ec;--acc:#2a55ff;--accink:#fff;--ok:#12805c;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1524;--card:#182033;--ink:#e9edf7;--mute:#9aa6c3;--line:#2a3450;--acc:#6b8bff;--accink:#0b1020;--ok:#3ecf9b}}
+:root[data-theme="dark"]{--bg:#0f1524;--card:#182033;--ink:#e9edf7;--mute:#9aa6c3;--line:#2a3450;--acc:#6b8bff;--accink:#0b1020;--ok:#3ecf9b}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;line-height:1.5}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+header{padding:28px 0 8px}
+h1{font-size:clamp(1.6rem,4vw,2.3rem);margin:0 0 4px;letter-spacing:-.02em}
+header p{margin:0;color:var(--mute);max-width:52ch}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:12px 0;z-index:5;border-bottom:1px solid var(--line)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+input[type=search],select{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+input[type=search]{flex:1 1 220px;min-width:0}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:10px 0 0}
+.chip{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;white-space:nowrap}
+.chip[aria-pressed=true]{background:var(--acc);color:var(--accink);border-color:var(--acc)}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.count{color:var(--mute);font-size:.9rem;margin:14px 0 10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;padding-bottom:40px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;text-align:left;font:inherit;color:inherit;cursor:pointer;padding:0;display:flex;flex-direction:column}
+.card:hover{border-color:var(--acc)}
+.pic{position:relative;height:140px;flex:0 0 140px;overflow:hidden;display:grid;place-items:center;font-size:3.6rem;background:var(--tint,#e7ecff)}
+.pic img,.dpic img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain}
+.info{padding:12px 14px 14px;display:flex;flex-direction:column;gap:4px;flex:1}
+.cat{font-size:.8rem;color:var(--mute)}
+.name{font-weight:700}
+.price{margin-top:auto;padding-top:6px;font-size:1.15rem;font-weight:700}
+.badge{font-size:.78rem;color:var(--ok);font-weight:700}
+.empty{padding:40px 0;text-align:center;color:var(--mute)}
+dialog{border:1px solid var(--line);border-radius:16px;padding:0;max-width:520px;width:calc(100% - 28px);background:var(--card);color:var(--ink)}
+dialog::backdrop{background:rgba(10,14,28,.55)}
+.dpic{position:relative;height:170px;overflow:hidden;display:grid;place-items:center;font-size:4.6rem;background:var(--tint,#e7ecff)}
+.dbody{padding:18px 20px 20px}
+.dbody h2{margin:0 0 4px;font-size:1.3rem}
+.dbody ul{padding-left:18px;margin:10px 0}
+.dprice{font-size:1.5rem;font-weight:700;margin:8px 0 14px}
+.btn{display:inline-block;font:inherit;font-weight:700;border:0;border-radius:10px;padding:12px 16px;cursor:pointer;text-decoration:none;text-align:center}
+.wa{background:#1fa855;color:#fff;width:100%}
+.close{float:right;background:var(--card);color:var(--ink);border:1px solid var(--line);padding:6px 12px;margin:10px}
+footer{border-top:1px solid var(--line);padding:22px 0 30px;color:var(--mute);font-size:.92rem}
+footer a{color:var(--acc)}
+:root{--bg:#0b1011;--card:#151c1d;--ink:#edf2ee;--mute:#9ba9a5;--line:#2c3838;--acc:#c8f169;--accink:#101609;--ok:#80d8a3;--surface:#111819;--photo:#eceee8}
+html{scroll-padding-top:90px;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Bahnschrift","Aptos","Segoe UI",sans-serif;line-height:1.55}
+.wrap{max-width:1180px;padding:0 24px}
+header{display:flex;align-items:center;gap:16px;padding:30px 0 24px}
+.brand-mark{width:48px;height:48px;flex:0 0 48px;display:grid;place-items:center;border:1px solid #526347;border-radius:8px;background:#1d291c;color:var(--acc);font-size:16px;font-weight:800}
+.brand-mark img{display:block;width:100%;height:100%;object-fit:contain;border-radius:50%}
+.brand-copy{min-width:0}
+.eyebrow{display:block;margin-bottom:3px;color:var(--acc);font-size:.72rem;font-weight:800;letter-spacing:.12em}
+h1{margin:0;font-size:32px;line-height:1.15;letter-spacing:0}
+header p{max-width:58ch;margin:5px 0 0;color:var(--mute);font-size:.95rem}
+.showcase{margin:4px 0 28px;padding:22px 0 18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.showcase-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:14px}
+.showcase-head h2{margin:0;font-size:23px;line-height:1.2}
+.carousel-nav{display:flex;align-items:center;gap:10px}
+.carousel-arrow{width:38px;height:38px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);font:inherit;font-size:24px;line-height:1;cursor:pointer;transition:border-color .18s,background .18s,color .18s}
+.carousel-arrow:hover{border-color:var(--acc);background:#202b20;color:var(--acc)}
+.slide-position{min-width:55px;color:var(--mute);font-size:.8rem;font-variant-numeric:tabular-nums;text-align:center}
+.feature{width:100%;min-height:320px;display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.9fr);padding:0;overflow:hidden;border:1px solid #34403e;border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;text-align:left;cursor:pointer;transition:border-color .2s,transform .2s}
+.feature:hover{transform:translateY(-2px);border-color:#839c5a}
+.feature-copy{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:30px 38px;min-width:0}
+.feature-category{margin-bottom:12px;color:var(--acc);font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em}
+.feature-name{display:block;max-width:19ch;margin:0;font-size:34px;line-height:1.12;letter-spacing:0;overflow-wrap:anywhere}
+.feature-description{display:block;max-width:48ch;margin:12px 0 22px;color:var(--mute);font-size:.95rem}
+.feature-bottom{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:14px;border-top:1px solid var(--line)}
+.feature-price{font-size:1.2rem;font-weight:800;font-variant-numeric:tabular-nums}
+.feature-action{color:var(--acc);font-size:.86rem;font-weight:700;white-space:nowrap}
+.feature-photo{position:relative;min-height:320px;display:grid;place-items:center;overflow:hidden;background:var(--photo)}
+.feature-photo::after{position:absolute;inset:0;border-left:1px solid rgba(10,16,17,.08);content:"";pointer-events:none}
+.feature-photo img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;transition:transform .35s ease}
+.feature:hover .feature-photo img{transform:scale(1.035)}
+.carousel-dots{display:flex;justify-content:center;gap:7px;padding-top:14px}
+.carousel-dot{width:8px;height:8px;padding:0;border:0;border-radius:8px;background:#45514d;cursor:pointer;transition:width .2s,background .2s}
+.carousel-dot[aria-pressed=true]{width:24px;background:var(--acc)}
+.bar{top:0;background:rgba(11,16,17,.94);backdrop-filter:blur(14px);border-color:var(--line)}
+.row{gap:9px}
+input[type=search],select{min-height:44px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);font:inherit}
+input[type=search]{padding-left:14px}
+input[type=search]::placeholder{color:#7c8985}
+select{cursor:pointer}
+.chips{gap:7px;padding-top:11px;scrollbar-width:thin}
+.chip{border:1px solid var(--line);border-radius:5px;background:var(--card);color:var(--mute);font-size:.9rem;padding:7px 13px;transition:background .16s,color .16s,border-color .16s}
+.chip:hover{border-color:#617056;color:var(--ink)}
+.chip[aria-pressed=true]{border-color:var(--acc);background:var(--acc);color:var(--accink);font-weight:700}
+:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.count{margin:18px 0 12px;color:var(--mute);font-size:.85rem}
+.grid{grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;padding-bottom:42px}
+.card{border:1px solid var(--line);border-radius:7px;background:var(--card);transition:transform .18s,border-color .18s,box-shadow .18s}
+.card:hover{transform:translateY(-3px);border-color:#70834e;box-shadow:0 12px 28px rgba(0,0,0,.24)}
+.pic{height:176px;flex-basis:176px;background:#202829}
+.pic img{object-fit:contain}
+.info{gap:5px;padding:13px 15px 15px}
+.cat{color:#a8b2ae;font-size:.76rem;font-weight:700}
+.name{min-height:2.8em;font-size:.98rem;line-height:1.4;overflow-wrap:anywhere}
+.price{padding-top:8px;color:var(--acc);font-size:1.12rem;font-variant-numeric:tabular-nums}
+.badge{align-self:flex-start;padding:2px 7px;border:1px solid #40523a;border-radius:3px;color:#c1e899;font-size:.7rem;letter-spacing:.02em}
+.empty{grid-column:1/-1;padding:54px 16px;border:1px dashed var(--line);border-radius:7px;color:var(--mute)}
+dialog{border-color:var(--line);border-radius:9px;background:var(--card);box-shadow:0 24px 80px rgba(0,0,0,.55)}
+dialog::backdrop{background:rgba(0,0,0,.76);backdrop-filter:blur(4px)}
+.dpic{background:#202829}
+.dbody{padding:20px 22px 22px}
+.dbody h2{font-size:1.35rem;line-height:1.25;overflow-wrap:anywhere}
+.dbody p{color:var(--mute)}
+.dprice{color:var(--acc);font-variant-numeric:tabular-nums}
+.btn{border-radius:6px}
+.wa{background:#16824d;color:white;transition:background .18s}
+.wa:hover{background:#1b9c5d}
+.close{background:var(--card);color:var(--ink)}
+footer{border-color:var(--line);color:var(--mute)}
+footer a{color:var(--acc)}
+@media(max-width:700px){
+  .wrap{padding:0 16px}
+  header{gap:12px;padding:22px 0 19px}
+  .brand-mark{width:42px;height:42px;flex-basis:42px}
+  h1{font-size:27px}
+  header p{font-size:.88rem}
+  .showcase{margin-bottom:20px;padding-top:18px}
+  .showcase-head{align-items:center}
+  .showcase-head h2{font-size:20px}
+  .carousel-nav{gap:6px}
+  .carousel-arrow{width:34px;height:34px}
+  .slide-position{min-width:46px;font-size:.72rem}
+  .feature{grid-template-columns:minmax(0,1fr) minmax(130px,.72fr);min-height:230px}
+  .feature-copy{padding:18px 16px}
+  .feature-category{font-size:.68rem}
+  .feature-name{font-size:24px}
+  .feature-description{display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:3;line-clamp:3;margin:9px 0 14px;font-size:.82rem}
+    .feature-description{display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:3;line-clamp:3;margin:9px 0 14px;font-size:.82rem}
+  .feature-price{font-size:1rem}
+  .feature-action{font-size:.75rem}
+  .feature-photo,.feature-photo img{min-height:230px}
+  .row select{flex:1 1 145px;min-width:0}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+  .pic{height:142px;flex-basis:142px}
+  .info{padding:11px 12px 13px}
+  .name{font-size:.9rem}
+}
+@media(max-width:420px){
+  .showcase-head h2{max-width:17ch;font-size:18px}
+  .feature{grid-template-columns:minmax(0,1fr) 112px;min-height:220px}
+  .feature-copy{padding:15px 12px}
+  .feature-name{font-size:21px}
+  .feature-bottom{align-items:flex-start;flex-direction:column;gap:4px}
+  .feature-photo,.feature-photo img{min-height:220px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pic{height:126px;flex-basis:126px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<span class="brand-mark"><img src="img/nexotechlogo.jpeg" alt="Logo de NexoTech"></span>
+<div class="brand-copy">
+<span class="eyebrow">TECNOLOGÍA · GAMING · ACCESORIOS</span>
+<h1 id="storeName">NexoTech</h1>
+<p>Audífonos, gaming, teclados, cargadores y más. Elige un producto y pídelo por WhatsApp.</p>
+</div>
+</header>
+<section class="showcase" id="showcase" aria-label="Productos destacados">
+<div class="showcase-head">
+<div><span class="eyebrow">SELECCIÓN NEXOTECH</span><h2>Un setup que va contigo</h2></div>
+<div class="carousel-nav" aria-label="Controles de productos destacados">
+<button class="carousel-arrow" id="previousSlide" type="button" aria-label="Producto anterior">‹</button>
+<span class="slide-position" id="slidePosition" aria-live="polite"></span>
+<button class="carousel-arrow" id="nextSlide" type="button" aria-label="Producto siguiente">›</button>
+</div>
+</div>
+<button class="feature" id="featuredSlide" type="button" aria-label="Ver producto destacado">
+<span class="feature-copy">
+<span class="feature-category" id="featureCategory"></span>
+<span class="feature-name" id="featureName"></span>
+<span class="feature-description" id="featureDescription"></span>
+<span class="feature-bottom"><strong class="feature-price" id="featurePrice"></strong><span class="feature-action">Ver producto <span aria-hidden="true">↗</span></span></span>
+</span>
+<span class="feature-photo" id="featureImage"></span>
+</button>
+<div class="carousel-dots" id="carouselDots" role="group" aria-label="Seleccionar producto destacado"></div>
+</section>
+<div class="bar">
+<div class="row">
+<input type="search" id="q" placeholder="Buscar: audífonos, teclado, cargador..." aria-label="Buscar productos">
+<select id="sort" aria-label="Ordenar">
+<option value="rel">Destacados</option>
+<option value="asc">Precio: menor a mayor</option>
+<option value="desc">Precio: mayor a menor</option>
+</select>
+<select id="range" aria-label="Rango de precio">
+<option value="all">Todos los precios</option>
+<option value="0-219999">Hasta $220.000</option>
+<option value="20000-119000">$20000 a 120000</option>
+<option value="120000-999999999">Más de $120000</option>
+</select>
+</div>
+<div class="chips" id="chips"></div>
+</div>
+<p class="count" id="count" aria-live="polite"></p>
+<div class="grid" id="grid"></div>
+</div>
+<dialog id="dlg" aria-labelledby="dname">
+<button class="btn close" id="closeBtn">Cerrar</button>
+<div class="dpic" id="dpic"></div>
+<div class="dbody">
+<div class="cat" id="dcat"></div>
+<h2 id="dname"></h2>
+<p id="ddesc"></p>
+<ul id="dspecs"></ul>
+<div class="dprice" id="dprice"></div>
+<a class="btn wa" id="dwa" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+</div>
+</dialog>
+<footer><div class="wrap">
+<span id="foot"></span>
+</div></footer>
+
+<script>
+/* ====== EDITA AQUÍ TUS DATOS ====== */
+const CONFIG={
+  storeName:"NexoTech Catalogo",
+  whatsapp:"573114635725",      // tu número con código de país, sin + ni espacios
+  currency:"COP",
+  instagram:"https://instagram.com/tu_usuario",
+  tiktok:"https://tiktok.com/@tu_usuario"
+};
+/* Cada producto: nombre, categoría, precio en COP, emoji, color, descripción, características e imagen opcional (ej. "img/audifonos.jpg") */
+const PRODUCTS=[
+{id:1,name:"Audifonos Tws Pro2",cat:"Audífonos",price:135000,emoji:"🎧",image:"img/Audifonos Tws Pro2.jpeg",tint:"#e3e9ff",tag:"Más vendido",desc:"Audífonos inalámbricos con estuche de carga tactil, ideales para el día a día.",specs:["Bluetooth 5.3"," PANTALLA TACTIL.","CARGA INALAMBRICA.","REDUCCION DE RUIDO."]},
+{id:2,name:"Audifonos Inalambricos Mini Tws Yw15",cat:"Audífonos",price:50000,emoji:"🎧",image:"img/Audifonos Inalambricos Mini Tws Yw15.jpg",tint:"#dff3ec",tag:"",desc:"Los Audífonos Inalámbricos Mini TWS YW15 ofrecen una experiencia de audio cómoda y práctica gracias a su diseño compacto y tecnología inalámbrica. Son ideales para escuchar música, atender llamadas o disfrutar contenido multimedia desde tu celular sin la molestia de cables.",specs:["Conectividad Bluetooth","Micrófono con reducción de ruido","Sonido claro para música y llamadas","Modo transparencia"]},
+{id:3,name:"Audifono Diadema Cascos Gamer Pro5 Par",cat:"Gaming",price:135000,emoji:"🎮",image:"img/Audifono Diadema Cascos Gamer Pro5 Par.jpg",tint:"#f0e2ff",tag:"",desc:"Audífonos con cable y micrófono, compatibles con PC y consolas.",specs:["Conexión USB o 3.5 mm","Micrófono flexible","Almohadillas suaves","Cable de 2 m"]},
+{id:4,name:"Audifonos Diademas Rgb Gamer Rosados Xte",cat:"Gaming",price:100000,emoji:"🕹️",image:"img/Audifonos Diademas Rgb Gamer Rosados Xte.jpg",tint:"#ffe3ef",tag:"Más vendido",desc:"Diadema con luces RGB de color rosa y sonido envolvente para largas sesiones de juego.",specs:["Sonido 7.1 virtual","Luces RGB y color rosa","Micrófono desmontable","Diadema ajustable"]},
+{id:5,name:"Teclado Gamer Mecanico Usb Anti Ghosting",cat:"Teclados y mouse",price:220000,emoji:"⌨️",image:"img/Teclado Gamer Mecanico Usb Anti Ghosting.jpg",tint:"#fff0d6",tag:"Nuevo",desc:"Teclado compacto con switches mecánicos e iluminación personalizable.",specs:["TECLADO MECÁNICO PARA GAMERS","Switches intercambiables","Retroiluminación RGB","Cable USB-C desmontable"]},
+{id:6,name:"Teclado Mecanico 60 Weibo Wb777",cat:"Teclados y mouse",price:85000,emoji:"⌨️",image:"img/Teclado Mecanico 60 Weibo Wb777.png",tint:"#e3e9ff",tag:"",desc:"Teclado pequeño para ahorrar espacio en tu escritorio y mejorar tu puntería.",specs:["Teclado mecanico RGB","Respuesta rápida","Iluminación RGB","Compatible con Windows y Mac"]},
+{id:7,name:"Mouse Gamer S180",cat:"Teclados y mouse",price:50000,emoji:"🖱️",image:"img/Mouse Gamer S180.png",tint:"#dff3ec",tag:"",desc:"Mouse con sensor preciso, botones programables y luces RGB.",specs:["Hasta 7200 DPI","Mouse weibo","Cable USB","Luces RGB"]},
+{id:8,name:"Mouse Gamer Wb915",cat:"Teclados y mouse",price:63000,emoji:"🖱️",image:"img/Mouse Gamer Wb915.png",tint:"#f0e2ff",tag:"Más vendido",desc:"Mouse cómodo y silencioso para oficina, estudio o casa.",specs:["Mouse Gamer","Clic silencioso","Conexion cable USB","RGB"]},
+{id:9,name:"Combo Gamer Teclado Con Luces Mouse",cat:"Teclados y mouse",price:160000,emoji:"🔌",image:"img/Combo Gamer Teclado Con Luces Mouse.jpg",tint:"#ffe3ef",tag:"Más vendido",desc:"Combo gamer Teclado+Mouse+Diadema+mousepad",specs:["Teclado mecanico","Combo gamer RGB","Diadema de alto rendimiento","Concexion cable USB"]},
+{id:10,name:"Almohadilla Tapete Pad Mouse Gamer",cat:"Accesorios",price:20000,emoji:"🔗",image:"img/Almohadilla Tapete Pad Mouse Gamer.webp",tint:"#fff0d6",tag:"",desc:"Almohadilla para mouse con diseño gamer.",specs:["Almohadilla de microfibra","Superficie antideslizante"]},
+{id:11,name:"Microfono Profesional Gamer",cat:"Accesorios",price:120000,emoji:"🎤",image:"img/mg.webp",tint:"#e3e9ff",tag:"",desc:"Microfono de alta calidad para streamers y gamers.",specs:["Respuesta en frecuencia amplia","Reducción de ruido","Conexión USB","Fácil de usar"]},
+{id:12,name:"Mouse Gamer M20",cat:"Teclados y mouse",price:44000,emoji:"🟦",image:"img/Mouse Gamer M20.png",tint:"#dff3ec",tag:"Nuevo",desc:"Mouse cómodo y silencioso para oficina, estudio o casa.",specs:["Mouse RGB","Click Silencioso","Conexion cable USB"]},
+{id:13,name:"Combo Gamer Teclado Con Luces Mouse 6",cat:"Accesorios",price:210000,emoji:"💻",image:"img/Combo Gamer Teclado Con Luces Mouse 6.jpg",tint:"#f0e2ff",tag:"",desc:"Combo gamer Teclado+Mouse+Diadema+mousepad",specs:["Combo gamer","Mouse","Teclado mecanico","diadema", "color blanco RGB"]},
+
+];
+
+const $=id=>document.getElementById(id);
+const fmt=n=>new Intl.NumberFormat("es-CO",{style:"currency",currency:CONFIG.currency,maximumFractionDigits:0}).format(n)+" "+CONFIG.currency;
+let cat="Todos";
+const cats=["Todos",...new Set(PRODUCTS.map(p=>p.cat))];
+const featuredProducts=PRODUCTS.filter(p=>p.tag).slice(0,5);
+let featuredIndex=0;
+
+function renderCarousel(){
+  if(!featuredProducts.length){$("showcase").hidden=true;return;}
+  const p=featuredProducts[featuredIndex];
+  $("featureCategory").textContent=p.cat+" · "+p.tag;
+  $("featureName").textContent=p.name;
+  $("featureDescription").textContent=p.desc;
+  $("featurePrice").textContent=fmt(p.price);
+  $("featureImage").innerHTML=p.image?'<img src="'+p.image+'" alt="">':p.emoji;
+  $("featuredSlide").setAttribute("aria-label","Ver detalles de "+p.name);
+  $("slidePosition").textContent=String(featuredIndex+1).padStart(2,"0")+" / "+String(featuredProducts.length).padStart(2,"0");
+  const dots=$("carouselDots");dots.innerHTML="";
+  featuredProducts.forEach((product,index)=>{
+    const dot=document.createElement("button");
+    dot.type="button";dot.className="carousel-dot";
+    dot.setAttribute("aria-label","Mostrar "+product.name);
+    dot.setAttribute("aria-pressed",index===featuredIndex);
+    dot.onclick=()=>{featuredIndex=index;renderCarousel();};
+    dots.appendChild(dot);
+  });
+}
+
+function waLink(p){
+  const msg="Hola, quiero pedir: "+p.name+" ("+fmt(p.price)+"). ¿Está disponible?";
+  return "https://wa.me/+573114635725"+CONFIG.whatsapp+"?text="+encodeURIComponent(msg);
+}
+function renderChips(){
+  $("chips").innerHTML="";
+  cats.forEach(c=>{
+    const b=document.createElement("button");
+    b.className="chip";b.textContent=c;b.setAttribute("aria-pressed",c===cat);
+    b.onclick=()=>{cat=c;renderChips();render();};
+    $("chips").appendChild(b);
+  });
+}
+function render(){
+  const q=$("q").value.trim().toLowerCase();
+  const [lo,hi]=$("range").value==="all"?[0,1e9]:$("range").value.split("-").map(Number);
+  let list=PRODUCTS.filter(p=>(cat==="Todos"||p.cat===cat)&&p.price>=lo&&p.price<=hi&&
+    (p.name+" "+p.cat+" "+p.desc).toLowerCase().includes(q));
+  const s=$("sort").value;
+  if(s==="asc")list.sort((a,b)=>a.price-b.price);
+  if(s==="desc")list.sort((a,b)=>b.price-a.price);
+  $("count").textContent=list.length+(list.length===1?" producto":" productos");
+  const g=$("grid");g.innerHTML="";
+  if(!list.length){g.innerHTML='<div class="empty" style="grid-column:1/-1">No encontramos productos con esos filtros. Prueba con otra palabra o quita un filtro.</div>';return;}
+  list.forEach(p=>{
+    const b=document.createElement("button");
+    b.className="card";b.style.setProperty("--tint",p.tint);
+    b.innerHTML='<div class="pic">'+(p.image?'<img src="'+p.image+'" alt="'+p.name+'" loading="lazy">':p.emoji)+'</div><div class="info"><span class="cat">'+p.cat+'</span><span class="name">'+p.name+'</span>'+(p.tag?'<span class="badge">'+p.tag+'</span>':'')+'<span class="price">'+fmt(p.price)+'</span></div>';
+    b.onclick=()=>openProduct(p);
+    g.appendChild(b);
+  });
+}
+function openProduct(p){
+  $("dpic").innerHTML=p.image?'<img src="'+p.image+'" alt="'+p.name+'">':p.emoji;$("dpic").style.setProperty("--tint",p.tint);
+  $("dcat").textContent=p.cat;$("dname").textContent=p.name;$("ddesc").textContent=p.desc;
+  $("dspecs").innerHTML=p.specs.map(s=>"<li>"+s+"</li>").join("");
+  $("dprice").textContent=fmt(p.price);$("dwa").href=waLink(p);
+  $("dlg").showModal();
+}
+$("closeBtn").onclick=()=>$("dlg").close();
+$("dlg").addEventListener("click",e=>{if(e.target===$("dlg"))$("dlg").close();});
+["previousSlide","nextSlide"].forEach((id,index)=>$(id).addEventListener("click",()=>{
+  featuredIndex=(featuredIndex+(index===0?-1:1)+featuredProducts.length)%featuredProducts.length;
+  renderCarousel();
+}));
+$("featuredSlide").onclick=()=>openProduct(featuredProducts[featuredIndex]);
+["q","sort","range"].forEach(id=>$(id).addEventListener("input",render));
+$("storeName").textContent=CONFIG.storeName;document.title=CONFIG.storeName+" · Catálogo";
+$("foot").innerHTML='Pedidos por <a href="https://wa.me/'+CONFIG.whatsapp+'" target="_blank" rel="noopener">WhatsApp</a> · <a href="'+CONFIG.instagram+'" target="_blank" rel="noopener">Instagram</a> · <a href="'+CONFIG.tiktok+'" target="_blank" rel="noopener">TikTok</a>';
+renderCarousel();renderChips();render();
+</script>
+</body>
+</html>
