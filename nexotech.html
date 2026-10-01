@@ -228,7 +228,8 @@ footer a{color:var(--acc)}
 <script>
 /* ====== EDITA AQUÍ TUS DATOS ====== */
 const CONFIG={
-  storeName:"NexoTech Catalogo",    // tu número con código de país, sin + ni espacios
+  storeName:"NexoTech Catalogo", 
+  whatsapp:"573114635725",// tu número con código de país, sin + ni espacios
   currency:"COP",
   instagram:"https://instagram.com/tu_usuario",
   tiktok:"https://www.tiktok.com/@nexotech67?_r=1&_t=ZS-9AB4Bydyyge"
@@ -281,7 +282,7 @@ function renderCarousel(){
 
 function waLink(p){
   const msg="Hola, quiero pedir: "+p.name+" ("+fmt(p.price)+"). ¿Está disponible?";
-  return "https://wa.me/573114635725"+CONFIG.whatsapp+"?text="+encodeURIComponent(msg);
+  return "https://wa.me/limasx.exe"+CONFIG.whatsapp+"?text="+encodeURIComponent(msg);
 }
 function renderChips(){
   $("chips").innerHTML="";
