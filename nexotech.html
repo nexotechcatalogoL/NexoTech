@@ -282,7 +282,7 @@ function renderCarousel(){
 
 function waLink(p){
   const msg="Hola, quiero pedir: "+p.name+" ("+fmt(p.price)+"). ¿Está disponible?";
-  return "https://wa.me/limasx.exe"+CONFIG.whatsapp+"?text="+encodeURIComponent(msg);
+  return "https://wa.me/"+CONFIG.whatsapp+"?text="+encodeURIComponent(msg);
 }
 function renderChips(){
   $("chips").innerHTML="";
